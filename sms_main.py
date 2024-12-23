@@ -127,10 +127,14 @@ class SchoolManagementSystem:
                    print("Not Found. :(")
                 self.main_code()
 
-
+    def delete_by_id(self,entity_id):
+        id_to_delete = entity_id
+        listOfStudents[:] = [inner_list for inner_list in listOfStudents if inner_list[0] != id_to_delete]
+        row = ["ID", "Name","Email","phone","Address","Course"]
+        print(tabulate(listOfStudents,headers = row,tablefmt="grid"))
 
     def main_code(self):
-     print("\nOpt from the following options : \n1.Student Entry\n2.Teacher Entry\n3.Course Entry\n4.Display Details.\n5.Exit ")
+     print("\nOpt from the following options : \n1.Student Entry\n2.Teacher Entry\n3.Course Entry\n4.Display Details.\n5.Delete Details.\n6.Exit ")
      choice = int(input("Enter your choice here : "))
 
      if choice == 1:
@@ -175,6 +179,10 @@ class SchoolManagementSystem:
 
          if a == 4:
              exit(0)
+
+     elif choice == 5:
+         id =int(input("Enter Id : "))
+         self.delete_by_id(id)
 
      else :
          exit(0)
