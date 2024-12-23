@@ -44,7 +44,7 @@ This project is still a work in progress, but I’d love to hear your thoughts s
 <br> <br>
 1.Open an issue in the Issues section.<br>
 2.Submit a pull request with any improvements you think of.<br>
-3.Reach out to me at krisharathod1645@gmail.com<br>
+3.Reach out to me at krisharathod1645@gmail.com <br>
 
 Your feedback is really helpful as I continue to improve the project!  :)
 
