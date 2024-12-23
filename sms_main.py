@@ -127,11 +127,30 @@ class SchoolManagementSystem:
                    print("Not Found. :(")
                 self.main_code()
 
-    def delete_by_id(self,entity_id):
-        id_to_delete = entity_id
-        listOfStudents[:] = [inner_list for inner_list in listOfStudents if inner_list[0] != id_to_delete]
-        row = ["ID", "Name","Email","phone","Address","Course"]
-        print(tabulate(listOfStudents,headers = row,tablefmt="grid"))
+    def delete_by_id(self,entity_type,entity_id):
+
+        if entity_type == 'Student':
+          id_to_delete = entity_id
+          listOfStudents[:] = [inner_list for inner_list in listOfStudents if inner_list[0] != id_to_delete]
+          row = ["ID", "Name","Email","phone","Address","Course"]
+          print(tabulate(listOfStudents,headers = row,tablefmt="grid"))
+          print("Student data of id", entity_id,"has been deleted successfully.")
+
+        elif entity_type == 'Teacher':
+          id_to_delete = entity_id
+          listOfTeachers[:] = [inner_list for inner_list in listOfTeachers if inner_list[0] != id_to_delete]
+          row = ["ID", "Name","Email","phone","Address","Course"]
+          print(tabulate(listOfTeachers,headers = row,tablefmt="grid"))
+          print("Teacher data of id", entity_id, "has been deleted successfully.")
+
+        else :
+          id_to_delete = entity_id
+          listOfCourses[:] = [inner_list for inner_list in listOfCourses if inner_list[0] != id_to_delete]
+          row = ["ID", "Course Name", "Description"]
+          print(tabulate(listOfCourses, headers=row, tablefmt="grid"))
+          print("Course data of id", entity_id, "has been deleted successfully.")
+        self.main_code()
+
 
     def main_code(self):
      print("\nOpt from the following options : \n1.Student Entry\n2.Teacher Entry\n3.Course Entry\n4.Display Details.\n5.Delete Details.\n6.Exit ")
@@ -181,14 +200,26 @@ class SchoolManagementSystem:
              exit(0)
 
      elif choice == 5:
-         id =int(input("Enter Id : "))
-         self.delete_by_id(id)
+         print("1.Delete Student by id.\n2.Delete Teacher details by id.\n3.Delete Course Details by id.\n4.Exit ")
+         choice = int(input("Enter your choice here : "))
+
+         if choice == 1:
+            id_1 = int(input("Enter your Student ID :"))
+            self.delete_by_id('Student',id_1)
+
+         elif choice == 2:
+            id_1 = int(input("Enter your Teacher ID :"))
+            self.delete_by_id('Teacher',id_1)
+
+         elif choice == 3:
+            id_1 = int(input("Enter your Course ID :"))
+            self.delete_by_id('Course',id_1)
+
+         else:
+             exit(0)
 
      else :
          exit(0)
-
-
-
 
 if __name__ == "__main__":
     sms = SchoolManagementSystem()
