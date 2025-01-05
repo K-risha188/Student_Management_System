@@ -37,6 +37,10 @@ A Student Management System developed using Python allows for efficient manageme
 
 ![Screenshot 2024-12-23 004420](https://github.com/user-attachments/assets/542a5a7d-a791-4543-a764-7c84f550e446)
 
+# Email Verfication Sreenshot
+![image](https://github.com/user-attachments/assets/7a0f03e4-79ef-401a-b3f2-c9a8dffc4bb4)
+
+
 # Feedback
 This project is still a work in progress, but I’d love to hear your thoughts so far! If you have any suggestions, spot any issues, or just want to share feedback, feel free to:
 <br> <br>
