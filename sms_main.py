@@ -5,6 +5,21 @@ listOfStudents = []
 listOfCourses = []
 listOfTeachers = []
 
+import re
+
+
+def validate_email(email):
+    # Define the regular expression pattern for a valid email address
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+
+    # Use re.match() to check if the email matches the pattern
+    if re.match(email_regex, email):
+        return True
+    else:
+        print("Invalid email address.")
+        print("Enter a valid email address.")
+        return False
+
 class Student:
     def __init__(self,name,email,phone, address,course):
      self.student_id = random.randint(1,1000000)
@@ -100,7 +115,7 @@ class SchoolManagementSystem:
                     break
 
                   else:
-                   print("Not Found. :(")
+                   print("Not Found. :(") #conitnue
                 self.main_code()
 
             elif entity_type =='Teacher':
@@ -127,48 +142,31 @@ class SchoolManagementSystem:
                    print("Not Found. :(")
                 self.main_code()
 
-    def delete_by_id(self,entity_type,entity_id):
-
-        if entity_type == 'Student':
-          id_to_delete = entity_id
-          listOfStudents[:] = [inner_list for inner_list in listOfStudents if inner_list[0] != id_to_delete]
-          row = ["ID", "Name","Email","phone","Address","Course"]
-          print(tabulate(listOfStudents,headers = row,tablefmt="grid"))
-          print("Student data of id", entity_id,"has been deleted successfully.")
-
-        elif entity_type == 'Teacher':
-          id_to_delete = entity_id
-          listOfTeachers[:] = [inner_list for inner_list in listOfTeachers if inner_list[0] != id_to_delete]
-          row = ["ID", "Name","Email","phone","Address","Course"]
-          print(tabulate(listOfTeachers,headers = row,tablefmt="grid"))
-          print("Teacher data of id", entity_id, "has been deleted successfully.")
-
-        else :
-          id_to_delete = entity_id
-          listOfCourses[:] = [inner_list for inner_list in listOfCourses if inner_list[0] != id_to_delete]
-          row = ["ID", "Course Name", "Description"]
-          print(tabulate(listOfCourses, headers=row, tablefmt="grid"))
-          print("Course data of id", entity_id, "has been deleted successfully.")
-        self.main_code()
 
 
     def main_code(self):
-     print("\nOpt from the following options : \n1.Student Entry\n2.Teacher Entry\n3.Course Entry\n4.Display Details.\n5.Delete Details.\n6.Exit ")
+     print("\nOpt from the following options : \n1.Student Entry\n2.Teacher Entry\n3.Course Entry\n4.Display Details.\n5.Exit ")
      choice = int(input("Enter your choice here : "))
 
      if choice == 1:
           print("\n                                            ----------𝙁𝙞𝙡𝙡 𝙞𝙣 𝙩𝙝𝙚 𝙎𝙩𝙪𝙙𝙚𝙣𝙩 𝘿𝙚𝙩𝙖𝙞𝙡𝙨----------")
           student = Student(input("Name : "),input("Email : "), int(input("Phone : ")), input("Address : "),input("Course opted : "))
-          sms.add_student(student.student_id,student.name,student.email,student.phone,student.address,student.course)
-          print("Student entry is successful. Student id is",student.student_id)
-          self.main_code()
+          if validate_email(student.email):
+            sms.add_student(student.student_id,student.name,student.email,student.phone,student.address,student.course)
+            print("Student entry is successful. Student id is",student.student_id)
+            self.main_code()
+          else:
+            self.main_code()
 
      elif choice == 2:
           print("\n                                            ----------𝙁𝙞𝙡𝙡 𝙞𝙣 𝙩𝙝𝙚 𝙏𝙚𝙖𝙘𝙝𝙚𝙧 𝘿𝙚𝙩𝙖𝙞𝙡𝙨:----------")
           teacher = Teacher(input("Name : "), input("Email : "), int(input("Phone : ")), input("Address : "),input("Course Enrolled in : "))
-          sms.add_teacher(teacher.teacher_id, teacher.name, teacher.email, teacher.phone, teacher.address,teacher.course)
-          print("Teacher entry is successful. Teacher id is",teacher.teacher_id)
-          self.main_code()
+          if validate_email(teacher.email):
+              sms.add_teacher(teacher.teacher_id, teacher.name, teacher.email, teacher.phone, teacher.address,teacher.course)
+              print("Teacher entry is successful. Teacher id is",teacher.teacher_id)
+              self.main_code()
+          else:
+            self.main_code()
 
 
      elif choice == 3:
@@ -199,29 +197,14 @@ class SchoolManagementSystem:
          if a == 4:
              exit(0)
 
-     elif choice == 5:
-         print("1.Delete Student by id.\n2.Delete Teacher details by id.\n3.Delete Course Details by id.\n4.Exit ")
-         choice = int(input("Enter your choice here : "))
-
-         if choice == 1:
-            id_1 = int(input("Enter your Student ID :"))
-            self.delete_by_id('Student',id_1)
-
-         elif choice == 2:
-            id_1 = int(input("Enter your Teacher ID :"))
-            self.delete_by_id('Teacher',id_1)
-
-         elif choice == 3:
-            id_1 = int(input("Enter your Course ID :"))
-            self.delete_by_id('Course',id_1)
-
-         else:
-             exit(0)
-
      else :
          exit(0)
+
+
+
 
 if __name__ == "__main__":
     sms = SchoolManagementSystem()
     print(" \n                                    ...................SCHOOL MANAGEMENT SYSTEM...................")
     sms.main_code()
+
